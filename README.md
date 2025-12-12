@@ -37,6 +37,9 @@ cd vulnapi-ci4
 # Copy environment file
 cp env.example .env
 
+~ Windows 
+copy env.example .env
+
 # Start containers
 docker-compose up -d --build
 
