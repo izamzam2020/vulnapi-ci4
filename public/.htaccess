@@ -1,0 +1,31 @@
+# VulnAPI Apache Configuration
+# INTENTIONALLY INSECURE FOR LEARNING PURPOSES
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Allow direct access to uploaded files (including PHP!)
+    RewriteCond %{REQUEST_URI} ^/uploads/
+    RewriteRule ^(.*)$ - [L]
+
+    # Route everything else to index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
+
+# VULNERABILITY: Server signature enabled
+ServerSignature On
+
+# VULNERABILITY: Directory listing enabled
+Options +Indexes
+
+# Disable security headers (intentionally insecure)
+<IfModule mod_headers.c>
+    # VULNERABILITY: Permissive CORS
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+    Header always set Access-Control-Allow-Headers "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization"
+</IfModule>
+

@@ -1,0 +1,39 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+/**
+ * VulnAPI - CodeIgniter 4 CLI Runner
+ */
+
+// Refuse to run when called from php-cgi
+if (str_contains(PHP_SAPI, 'cgi')) {
+    exit("The cli tool is not supported when running php-cgi. It needs php-cli to function!\n\n");
+}
+
+// We want errors to be shown when using it from the CLI.
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+// Define FCPATH first
+define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR);
+
+// Check for Composer autoloader
+$vendorPath = __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+if (!is_file($vendorPath)) {
+    echo "ERROR: Composer dependencies not installed!\n";
+    echo "Please run: composer install\n\n";
+    exit(1);
+}
+
+// Load Composer autoloader BEFORE loading Paths
+require $vendorPath;
+
+// Load the Paths config
+require __DIR__ . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php';
+
+$paths = new Config\Paths();
+
+// Boot the Spark CLI application
+exit(\CodeIgniter\Boot::bootSpark($paths));

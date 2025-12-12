@@ -1,0 +1,48 @@
+# VulnAPI .gitignore
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Composer
+/vendor/
+composer.lock
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Writable directory contents (keep structure)
+/writable/cache/*
+!/writable/cache/.gitkeep
+/writable/logs/*
+!/writable/logs/.gitkeep
+/writable/session/*
+!/writable/session/.gitkeep
+/writable/uploads/*
+!/writable/uploads/.gitkeep
+/writable/debugbar/*
+
+# Public uploads (keep structure)
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# Docker volumes
+vulnapi-db-data/
+
+# Testing
+/phpunit.xml
+/.phpunit.result.cache
+/coverage/
+
+# Build artifacts
+*.log
+*.cache
+

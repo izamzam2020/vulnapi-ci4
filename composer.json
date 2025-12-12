@@ -1,0 +1,42 @@
+{
+    "name": "vulnapi/ci4",
+    "description": "Intentionally Vulnerable REST API for Security Learning - CodeIgniter 4",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "codeigniter4/framework": "^4.4",
+        "firebase/php-jwt": "^6.10",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "mikey179/vfsstream": "^1.6",
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Config\\": "app/Config/"
+        },
+        "exclude-from-classmap": [
+            "**/Database/Migrations/**"
+        ],
+        "files": [
+            "app/Helpers/jwt_helper.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "@composer dump-autoload"
+        ],
+        "test": "phpunit"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
